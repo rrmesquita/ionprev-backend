@@ -1,12 +1,24 @@
 {
   "scripts": {
     "dev": "nodemon src/index.js",
-    "start": "node src/index.js",
+    "predev": "npm run prestart",
+    "start": "API_PORT=8000 node src/index.js",
+    "prestart": "npm-run-all migrate:undo migrate seed",
     "lint": "eslint src/**/*.js",
-    "lintfix": "eslint src/**/*.js --fix"
+    "lintfix": "eslint src/**/*.js --fix",
+    "migrate": "sequelize db:migrate",
+    "migrate:undo": "sequelize db:migrate:undo:all",
+    "seed": "sequelize db:seed:all"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "csv-parse": "^4.4.5",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "faker": "^4.1.0",
+    "multer": "^1.4.2",
+    "npm-run-all": "^4.1.5",
+    "pg": "^7.12.1",
+    "sequelize": "^5.15.2"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.2",
@@ -14,6 +26,7 @@
     "eslint-config-prettier": "^6.1.0",
     "eslint-plugin-prettier": "^3.1.0",
     "nodemon": "^1.19.1",
-    "prettier": "^1.18.2"
+    "prettier": "^1.18.2",
+    "sequelize-cli": "^5.5.0"
   }
 }

@@ -1,4 +1,5 @@
 const express = require("express");
+const routes = require("./app/routes");
 
 class AppController {
   constructor() {
@@ -11,7 +12,8 @@ class AppController {
     this.express.use(express.json());
     this.express.use(express.urlencoded({ extended: false }));
     this.express.use((req, res, next) => {
-      res.header("Access-Control-Allow-Origin", "*");
+      const corsPort = process.env.WEB_PORT == 80 ? "" : `:${process.env.WEB_PORT}`;
+      res.header("Access-Control-Allow-Origin", process.env.WEB_HOST + corsPort);
       res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Content-Disposition, Accept");
       res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
       next();
@@ -19,7 +21,7 @@ class AppController {
   }
 
   routes() {
-    this.express.get("/", (req, res) => res.send("Hello IonPrev!"));
+    this.express.use(routes);
   }
 }
 

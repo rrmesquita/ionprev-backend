@@ -1,3 +1,6 @@
+const dotenv = require("dotenv").config();
 const app = require("./app");
 
-app.listen(8000);
+if (dotenv.error) throw dotenv.error;
+
+app.listen(process.env.API_PORT);
