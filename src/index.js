@@ -3,4 +3,4 @@ const app = require("./app");
 
 if (dotenv.error) throw dotenv.error;
 
-app.listen(process.env.API_PORT);
+app.listen(process.env.PORT || 3000);
